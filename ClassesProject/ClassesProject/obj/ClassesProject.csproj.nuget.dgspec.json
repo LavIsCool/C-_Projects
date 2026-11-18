@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LaviV\\Documents\\Elektronica\\C# projects\\ClassesProject\\ClassesProject\\ClassesProject.csproj": {}
+    "C:\\Users\\Lavi\\Documents\\Project_Repo\\C-_Projects\\ClassesProject\\ClassesProject\\ClassesProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LaviV\\Documents\\Elektronica\\C# projects\\ClassesProject\\ClassesProject\\ClassesProject.csproj": {
+    "C:\\Users\\Lavi\\Documents\\Project_Repo\\C-_Projects\\ClassesProject\\ClassesProject\\ClassesProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LaviV\\Documents\\Elektronica\\C# projects\\ClassesProject\\ClassesProject\\ClassesProject.csproj",
+        "projectUniqueName": "C:\\Users\\Lavi\\Documents\\Project_Repo\\C-_Projects\\ClassesProject\\ClassesProject\\ClassesProject.csproj",
         "projectName": "ClassesProject",
-        "projectPath": "C:\\Users\\LaviV\\Documents\\Elektronica\\C# projects\\ClassesProject\\ClassesProject\\ClassesProject.csproj",
-        "packagesPath": "C:\\Users\\LaviV\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LaviV\\Documents\\Elektronica\\C# projects\\ClassesProject\\ClassesProject\\obj\\",
+        "projectPath": "C:\\Users\\Lavi\\Documents\\Project_Repo\\C-_Projects\\ClassesProject\\ClassesProject\\ClassesProject.csproj",
+        "packagesPath": "C:\\Users\\Lavi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lavi\\Documents\\Project_Repo\\C-_Projects\\ClassesProject\\ClassesProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\LaviV\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Lavi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.321/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\LaviV\\Documents\\Elektronica\\C# projects\\ClassesProject\\",
+  "WorkspaceRootPath": "C:\\Users\\Lavi\\Documents\\Project_Repo\\C-_Projects\\ClassesProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C5318154-6490-4A6F-BD79-633E5E58C992}|ClassesProject\\ClassesProject.csproj|c:\\users\\laviv\\documents\\elektronica\\c# projects\\classesproject\\classesproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C5318154-6490-4A6F-BD79-633E5E58C992}|ClassesProject\\ClassesProject.csproj|c:\\users\\lavi\\documents\\project_repo\\c-_projects\\classesproject\\classesproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C5318154-6490-4A6F-BD79-633E5E58C992}|ClassesProject\\ClassesProject.csproj|solutionrelative:classesproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\LaviV\\Documents\\Elektronica\\C# projects\\ClassesProject\\ClassesProject\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Lavi\\Documents\\Project_Repo\\C-_Projects\\ClassesProject\\ClassesProject\\Program.cs",
               "RelativeDocumentMoniker": "ClassesProject\\Program.cs",
-              "ToolTip": "C:\\Users\\LaviV\\Documents\\Elektronica\\C# projects\\ClassesProject\\ClassesProject\\Program.cs",
+              "ToolTip": "C:\\Users\\Lavi\\Documents\\Project_Repo\\C-_Projects\\ClassesProject\\ClassesProject\\Program.cs",
               "RelativeToolTip": "ClassesProject\\Program.cs",
-              "ViewState": "AgIAAMUAAAAAAAAAAAAuwNEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHQBAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-28T10:24:03.389Z",
               "EditorCaption": ""

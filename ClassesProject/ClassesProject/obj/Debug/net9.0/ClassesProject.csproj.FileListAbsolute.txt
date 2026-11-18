@@ -12,3 +12,18 @@ C:\Users\LaviV\Documents\Elektronica\C# projects\ClassesProject\ClassesProject\o
 C:\Users\LaviV\Documents\Elektronica\C# projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.pdb
 C:\Users\LaviV\Documents\Elektronica\C# projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.genruntimeconfig.cache
 C:\Users\LaviV\Documents\Elektronica\C# projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ref\ClassesProject.dll
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\bin\Debug\net9.0\ClassesProject.exe
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\bin\Debug\net9.0\ClassesProject.deps.json
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\bin\Debug\net9.0\ClassesProject.runtimeconfig.json
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\bin\Debug\net9.0\ClassesProject.dll
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\bin\Debug\net9.0\ClassesProject.pdb
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.AssemblyInfoInputs.cache
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.AssemblyInfo.cs
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.csproj.CoreCompileInputs.cache
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.sourcelink.json
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.dll
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\refint\ClassesProject.dll
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.pdb
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ClassesProject.genruntimeconfig.cache
+C:\Users\Lavi\Documents\Project_Repo\C-_Projects\ClassesProject\ClassesProject\obj\Debug\net9.0\ref\ClassesProject.dll

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Classes
 {
@@ -129,7 +128,7 @@ namespace Classes
         public int CalcAge(Date birthday)
         {
             int age;
-            age = birthday.GetYear() - this.year;
+            age = this.year - birthday.GetYear();
             if (birthday.GetMonth() > this.month) { age--; }
             else if (birthday.GetMonth() == this.month && birthday.GetDay() > this.day) { age--; }
             return age;
@@ -155,8 +154,77 @@ namespace Classes
             return $"{this.day}/{this.month}/{this.year}";
         }
     }
+    public class Cycle
+    {
+        private double x;
+        private double y;
+        private double radius;
+        private double pi = Math.PI;
 
-
+        public Cycle(double x, double y, double radius)
+        {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+        }
+        public double GetX() { return this.x; }
+        public double GetY() { return this.y; }
+        public double GetRadius() { return this.radius; }
+        public void SetX(double x) { this.x = x; }
+        public void SetY(double y) { this.y = y; }
+        public void SetRadius(double radius) { this.radius = radius; }
+        public double CalcSurface() { return this.pi * this.radius * this.radius; }
+        public double CalcPerimeter() { return 2 * this.pi * this.radius; }
+        public bool Inside(double x, double y) { return (x - this.x) * (x - this.x) - (y - this.y) * (y - this.y) < this.radius * this.radius; }
+        public double CalcArc(double angel) { return CalcPerimeter() * (angel/360); }
+        public override string ToString() { return $"({this.x},{this.y}), radius = {this.radius}"; }
+    }
+    public class Polynom
+    {
+        private double a;
+        private double b;
+        public Polynom(double a, double b)
+        {
+            this.a = a;
+            this.b = b;
+        }
+        public double GetA() { return this.a; }
+        public double GetB() { return this.b; }
+        public void SetA(double a) { this.a = a; }
+        public void SetB(double b) { this.b = b; }
+        public double Result(double x) { return this.a * x + this.b; }
+        public double ConnectX() { return -this.b / this.a; }
+        public double ConnectY() { return this.b; }
+        public Polynom Add(Polynom P) { return new Polynom(P.GetA() + this.a, P.GetB() + this.b); }
+        public bool OnPolynom(double x, double y) { return Result(x) == y; }
+        public override string ToString() { return $"{this.a}x + {this.b}"; }
+    }
+    public class Rectangle
+    {
+        private double x;
+        private double y;
+        private double width;
+        private double length;
+        public Rectangle(double length, double width, double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.length = length;
+        }
+        public double GetLength() { return this.length; }
+        public double GetWidth()  { return this.width;  }
+        public double GetPointX() { return this.x; }
+        public double GetPointY() { return this.y; }
+        public void SetLength(double length) { this.length = length; }
+        public void SetWidth(double width) { this.width = width; }
+        public void SetPointX(double x) { this.x = x; }
+        public void SetPointY(double y) { this.y = y; }
+        public double CalcArea() { return this.length * this.width; }
+        public double CalcPerimeter() { return 2 * (this.length + this.width); }
+        public bool IsInside(double x, double y) { return (x - this.x <= this.length && x - this.x >= 0) && (y - this.y <= this.width && y - this.y >= 0); }
+        public override string ToString() { return $"Rectangle({this.length}X{this.width}) in Point ({this.x}, {this.y})"; }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -172,6 +240,10 @@ namespace Classes
                     case "1": Console.WriteLine("Ex 01: \n"); TestPoint(); break;
                     case "2": Console.WriteLine("Ex 02: \n"); TestArray(); break;
                     case "3": Console.WriteLine("Ex 03: \n"); TestDate() ; break;
+                    case "4": Console.WriteLine("Ex 04: \n"); TestCycle(); break;
+                    case "5": Console.WriteLine("Ex 05: \n"); TestPolynom(); break;
+                    case "6": Console.WriteLine("Ex 06: \n"); TestRect(); break;
+                    case "7": Console.WriteLine("Ex 07: \n"); TestRect2(); break;
                     case "_": Console.WriteLine("bye"); break;
                     default: Console.WriteLine("Enter valid number"); break;
                 }
@@ -202,9 +274,136 @@ namespace Classes
         }
         static void TestDate()
         {
-            Date d1 = new Date(20, 10, 1935);
-            Date d2 = new Date(21, 8, 1995);
-            Console.WriteLine($"Date 1 = {d1.ToString()}\nDate 2 = {d2.ToString()}");
+            Date date1 = new Date(20, 10, 1935);
+            Date date2 = new Date(21, 8, 1995);
+            Console.WriteLine($"Date 1 = {date1.ToString()}\nDate 2 = {date2.ToString()}");
+            date1.SetDay(15);
+            date2.SetYear(1997);
+            Console.WriteLine($"Date 1 = {date1.ToString()}\nDate 2 = {date2.ToString()}");
+            Date birth = new Date(5, 11, 1997);
+            Date current = new Date(18, 11, 2026);
+            Console.WriteLine($"Birthday = {birth.ToString()}\nCurrent Date = {current.ToString()}\nAge = {current.CalcAge(birth)}");
+            Date d1 = new Date(17, 6, 1979);
+            Date d2 = new Date(2, 4, 1981);
+            if (d1.After(d2)) Console.WriteLine("d1 is After d2");
+            else Console.WriteLine("d2 is After d1");
+            Date[] arrDate = new Date[10];
+            Console.WriteLine("Enter 10 dates: ");
+            for (int i = 0; i < arrDate.Length; i++)
+            {
+                Console.Write("day => ");
+                int day = int.Parse(Console.ReadLine());
+                Console.Write("month => ");
+                int month = int.Parse(Console.ReadLine());
+                Console.Write("year => ");
+                int year = int.Parse(Console.ReadLine());
+                arrDate[i] = new Date(day, month, year);
+                Console.WriteLine();
+            }
+            Date comp = new Date(1, 1, 2000);
+            int count = comp.CheckYear(arrDate);
+            Console.WriteLine($"{count} dates are in the year 2000");
+        }
+        static void TestCycle()
+        {
+            Cycle a = new Cycle(3, 8.25, 2.5);
+            Cycle b = new Cycle(1, 2.3, 5);
+            Console.WriteLine($"a = {a.ToString()}\nSa = {a.CalcSurface()}");
+            Console.WriteLine($"b = {b.ToString()}\nPb = {b.CalcPerimeter()}");
+            a.SetRadius(6.45);
+            Console.WriteLine($"a = {a.ToString()}");
+            b.SetX(4.3); b.SetY(1.5);
+            Console.WriteLine($"b = {b.ToString()}");
+            Console.Write("Enter a point:\nx => ");
+            double x = double.Parse(Console.ReadLine());
+            Console.Write("y => ");
+            double y = double.Parse(Console.ReadLine());
+            bool inA = a.Inside(x, y);
+            bool inB = b.Inside(x, y);
+            if (inA && inB) Console.WriteLine("The point is inside both circles");
+            else if (inA) Console.WriteLine("The point is inside circle a");
+            else if (inB) Console.WriteLine("The point is inside circle b");
+            else Console.WriteLine("The point is outside both circles");
+            if (a.CalcArc(35) > b.CalcArc(35)) Console.WriteLine($"a has a bigger Arc of {a.CalcArc(35)}");
+            else if (a.CalcArc(35) < b.CalcArc(35)) Console.WriteLine($"a has a bigger Arc of {b.CalcArc(35)}");
+            else Console.WriteLine($"Both Arcs are equal {b.CalcArc(35)}");
+        }
+        static void TestPolynom()
+        {
+            Polynom f = new Polynom(3, 4);
+            Polynom g = new Polynom(7.5, 9);
+            Console.WriteLine($"f(x) = {f.ToString()}\ng(x) = {g.ToString()}");
+            Console.WriteLine($"f(3) = {f.Result(3)}");
+            Console.WriteLine($"g(1.25) = {g.Result(1.25)}");
+            Console.WriteLine($"({f.ConnectX()}, 0)");
+            Console.WriteLine($"(0, {g.ConnectY()})");
+            Console.Write("Enter a point:\nx => ");
+            double x = double.Parse(Console.ReadLine());
+            Console.Write("y => ");
+            double y = double.Parse(Console.ReadLine());
+            bool Onf = f.OnPolynom(x, y);
+            bool Ong = g.OnPolynom(x, y);
+            if (Onf && Ong) Console.WriteLine("The point is on both functions");
+            else if (Onf) Console.WriteLine("The point is on function f");
+            else if (Ong) Console.WriteLine("The point is on function g");
+            else Console.WriteLine("The point is not on either function");
+
+        }
+        static void TestRect()
+        {
+            Rectangle a = new Rectangle(3, 5, 9, 1.5);
+            Rectangle b = new Rectangle(9, 6, 3, 4.5);
+            Console.WriteLine($"a = {a.ToString()}\nSa = {a.CalcArea()}");
+            Console.WriteLine($"b = {b.ToString()}\nPb = {b.CalcPerimeter()}");
+            a.SetPointX(1); a.SetPointY(2);
+            Console.WriteLine($"a = {a.ToString()}");
+            b.SetLength(2); b.SetWidth(3);
+            Console.WriteLine($"b = {b.ToString()}");
+            Console.Write("Enter a point:\nx => ");
+            double x = double.Parse(Console.ReadLine());
+            Console.Write("y => ");
+            double y = double.Parse(Console.ReadLine());
+            bool inA = a.IsInside(x, y);
+            bool inB = b.IsInside(x, y);
+            if (inA && inB) Console.WriteLine("The point is inside both rectangles");
+            else if (inA) Console.WriteLine("The point is inside rectangle a");
+            else if (inB) Console.WriteLine("The point is inside rectangle b");
+            else Console.WriteLine("The point is outside both rectangles");
+        }
+        static void TestRect2()
+        {
+            Rectangle[] arrRect = new Rectangle[10];
+            Console.WriteLine("Enter 10 Rectangles: ");
+            for (int i = 0; i < arrRect.Length; i++)
+            {
+                Console.Write("length => ");
+                double length = double.Parse(Console.ReadLine());
+                Console.Write("width => ");
+                double width = double.Parse(Console.ReadLine());
+                Console.Write("x => ");
+                double X = double.Parse(Console.ReadLine());
+                Console.Write("y => ");
+                double Y = double.Parse(Console.ReadLine());
+                arrRect[i] = new Rectangle(length, width, X, Y);
+                Console.WriteLine();
+            }
+            Console.Write("Enter point:\nx => ");
+            double x = double.Parse(Console.ReadLine());
+            Console.Write("y => ");
+            double y = double.Parse(Console.ReadLine());
+            Rectangle smol = arrRect[0];
+            double smolSize = smol.CalcArea();
+            bool found = false;
+            for (int i = 1; i < arrRect.Length; i++)
+            {
+                if (arrRect[i].IsInside(x, y)) 
+                {
+                    found = true; 
+                    if (arrRect[i].CalcArea() < smolSize) { smol = arrRect[i]; smolSize = smol.CalcArea(); }
+                } 
+            }
+            if (!found) Console.WriteLine("The point is not in any rectangle");
+            else Console.WriteLine(smol.ToString());
         }
     }
 }
