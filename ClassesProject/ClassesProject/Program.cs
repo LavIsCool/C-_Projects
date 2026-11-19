@@ -225,6 +225,67 @@ namespace Classes
         public bool IsInside(double x, double y) { return (x - this.x <= this.length && x - this.x >= 0) && (y - this.y <= this.width && y - this.y >= 0); }
         public override string ToString() { return $"Rectangle({this.length}X{this.width}) in Point ({this.x}, {this.y})"; }
     }
+    public class Account
+    {
+        private int accountNum;
+        private string ownerName = "";
+        private double balance;
+        public Account(int accountNum, string ownerName, double balance)
+        {
+            this.accountNum = accountNum;
+            this.ownerName = ownerName;
+            this.balance = balance;
+        }
+        public void Deposit(double amount) { this.balance += amount; }
+        public void Withdraw(double amount) { this.balance -= amount; }
+        public int GetAccountNum() { return accountNum; }
+        public string GetOwnerName() { return ownerName; }
+        public double GetBalance() { return balance; }
+        public override string ToString() { return $"Num: {this.accountNum}, Name: {this.ownerName}, Balance: {this.balance}"; }
+    }
+    public class Bucket
+    {
+        private int capacity;
+        private double water = 0;
+        public Bucket(int capacity) { this.capacity = capacity; }
+        public void Empty() { this.water = 0; }
+        public bool IsEmpty() { return this.capacity == 0; }
+        public void Fill(double amountToFill) { this.water += amountToFill; if (this.water > (double)this.capacity) this.water = (double)this.capacity; }
+        public int GetCapacity() { return this.capacity; }
+        public double GetCurrentAmount() { return water; }
+        public void PourInto(Bucket bucketInto)
+        {
+            int inCpacity = bucketInto.GetCapacity();
+            double inWater = bucketInto.GetCurrentAmount();
+            double inEmpty = (double)inCpacity - inWater;
+            if (inEmpty == 0) return;
+            if (inEmpty >= this.water)
+            {
+                bucketInto.Fill(this.water);
+                this.Empty();
+                return;
+            }
+            bucketInto.Fill(this.water);
+            this.water -= inEmpty;
+        }
+        public override string ToString() { return $"The capacity: {this.capacity}\nThe current amount of water: {this.water}"; }
+    }
+    public class Rational
+    {
+        private int x;
+        private int y;
+        public Rational(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        public int GetNumerator() { return x; }
+        public int GetDenom() { return y; }
+        public bool IsEqual(Rational num) { return (double)this.x / (double)this.y == (double)num.GetNumerator() / (double)num.GetDenom(); }
+        public Rational Multiply(Rational num) { return new Rational(this.x * num.GetNumerator(), this.y * num.GetDenom()); }
+        public Rational Divide(Rational num) { if (num.GetNumerator() == 0) return null; return new Rational(this.x * num.GetDenom(), this.y * num.GetNumerator()); }
+        public override string ToString() { return $"{this.x}/{this.y}"; }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -237,14 +298,18 @@ namespace Classes
                 Console.WriteLine("---");
                 switch (task) 
                 {
-                    case "1": Console.WriteLine("Ex 01: \n"); TestPoint(); break;
-                    case "2": Console.WriteLine("Ex 02: \n"); TestArray(); break;
-                    case "3": Console.WriteLine("Ex 03: \n"); TestDate() ; break;
-                    case "4": Console.WriteLine("Ex 04: \n"); TestCycle(); break;
-                    case "5": Console.WriteLine("Ex 05: \n"); TestPolynom(); break;
-                    case "6": Console.WriteLine("Ex 06: \n"); TestRect(); break;
-                    case "7": Console.WriteLine("Ex 07: \n"); TestRect2(); break;
-                    case "_": Console.WriteLine("bye"); break;
+                    case  "1": Console.WriteLine("Ex 01: \n"); TestPoint(); break;
+                    case  "2": Console.WriteLine("Ex 02: \n"); TestArray(); break;
+                    case  "3": Console.WriteLine("Ex 03: \n"); TestDate() ; break;
+                    case  "4": Console.WriteLine("Ex 04: \n"); TestCycle(); break;
+                    case  "5": Console.WriteLine("Ex 05: \n"); TestPolynom(); break;
+                    case  "6": Console.WriteLine("Ex 06: \n"); TestRect(); break;
+                    case  "7": Console.WriteLine("Ex 07: \n"); TestRect2(); break;
+                    case  "8": Console.WriteLine("Ex 08: \n"); TestAccount(); break;
+                    case  "9": Console.WriteLine("Ex 09: \n"); TestAccount2(); break;
+                    case "10": Console.WriteLine("Ex 10: \n"); TestBucket(); break;
+                    case "11": Console.WriteLine("Ex 11: \n"); TestRational(); break;
+                    case  "_": Console.WriteLine("bye"); break;
                     default: Console.WriteLine("Enter valid number"); break;
                 }
             } while (task != "_");
@@ -404,6 +469,175 @@ namespace Classes
             }
             if (!found) Console.WriteLine("The point is not in any rectangle");
             else Console.WriteLine(smol.ToString());
+        }
+        static void TestAccount()
+        {
+            Console.Write("Enter your name to create a new account:\n=> ");
+            string name = Console.ReadLine();
+            Account user = new Account(123, name, 100);
+            Console.Write("Enter amount to deposit:\n=> ");
+            double money = int.Parse(Console.ReadLine());
+            user.Deposit(money);
+            Console.WriteLine(user.ToString());
+        }
+        static void TestAccount2()
+        {
+            Account[] arr = new Account[20];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Console.Write("Enter your name to create a new account:\n=> ");
+                string name = Console.ReadLine();
+                Console.Write("Enter starting amount:\n=> ");
+                double money = int.Parse(Console.ReadLine());
+                arr[i] = new Account(i, name, money);
+                Console.WriteLine();
+            }
+            Console.Write("Enter account number:\n=> ");
+            int num = int.Parse(Console.ReadLine());
+            Console.Write("Enter your name:\n=> ");
+            string user = Console.ReadLine();
+            if (arr[num].GetOwnerName() != user) Console.WriteLine("Error *Wrong name or account number*");
+            else
+            {
+                Console.Write("Enter amout to withdraw:\n=> ");
+                double amount = int.Parse(Console.ReadLine());
+                if (arr[num].GetBalance() >= amount)
+                {
+                    arr[num].Withdraw(amount);
+                    Console.WriteLine($"New balance: {arr[num].GetBalance()}");
+                }
+                else Console.WriteLine("Error *You are too poor to withdraw this amount*");
+            }
+        }
+        static void TestBucket() 
+        {
+            Console.Write("Enter sub task number: \n=> ");
+            string task = Console.ReadLine();
+            Console.WriteLine();
+            switch (task)
+            {
+                case "1": Console.WriteLine("Sub 01: \n"); task101(); break;
+                case "2": Console.WriteLine("Sub 02: \n"); task102(); break;
+                case "3": Console.WriteLine("Sub 03: \n"); task103(); break;
+                default: Console.WriteLine("Enter valid number"); break;
+            }
+        }
+        static void task101()
+        {
+            int capacity = 10;
+            Bucket[] arr = new Bucket[6];
+            double water = (double)capacity;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = new Bucket(capacity);
+                arr[i].Fill(Math.Pow(2, -i) *water);
+                Console.WriteLine($"[{i}]:\n{arr[i].ToString()}");
+            }
+        }
+        static void task102()
+        {
+            Console.Write("Enter number of buckets:\n=> ");
+            int n = int.Parse(Console.ReadLine());
+            Bucket[] arr = new Bucket[n];
+            Random rnd = new Random();
+            double max = 0;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = new Bucket(20);
+                double water = rnd.NextDouble() * 20;
+                arr[i].Fill(water);
+                if (water > max) max = water;
+                Console.WriteLine($"[{i}]:\n{arr[i].ToString()}");
+            }
+            Console.WriteLine();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i].Empty();
+                arr[i].Fill(max);
+                Console.WriteLine($"[{i}]:\n{arr[i].ToString()}");
+            }
+        }
+        static void task103()
+        {
+            Console.Write("Enter number of buckets:\n=> ");
+            int n = int.Parse(Console.ReadLine());
+            Bucket[] arr = new Bucket[n];
+            Random rnd = new Random();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int capacity = rnd.Next(11);
+                arr[i] = new Bucket(capacity);
+                double water = rnd.NextDouble() * capacity;
+                arr[i].Fill(water);
+                Console.WriteLine($"[{i}]:\n{arr[i].ToString()}");
+            }
+            Bucket[] newArr = new Bucket[n];
+            newArr = arr;
+            for (int i = 0;i < newArr.Length - 1; i++)
+            {
+                bool swapped = false;
+                for (int j = 0; j < newArr.Length - 1 - i; j++)
+                {
+                    double water0 = newArr[j].GetCurrentAmount();
+                    double water1 = newArr[j+1].GetCurrentAmount();
+                    if (water0 > water1)
+                    {
+                        swapped = true;
+                        Bucket temp = newArr[j];
+                        newArr[j] = newArr[j+1];
+                        newArr[j+1] = temp;
+                    }
+                }
+                if (!swapped) break;
+            }
+            Console.WriteLine("\nSorted:\n");
+            for (int i = 0; i < newArr.Length; i++)
+            {
+                Console.WriteLine($"[{i}]:\n{newArr[i].ToString()}");
+            }
+        }
+        static void TestRational()
+        {
+            Console.Write("Enter numerator:\n=> ");
+            int x = int.Parse(Console.ReadLine());
+            Console.Write("Enter denominator:\n=> ");
+            int y = int.Parse(Console.ReadLine());
+            Rational a = new Rational(x, y);
+            Console.Write("\nEnter numerator:\n=> ");
+            x = int.Parse(Console.ReadLine());
+            Console.Write("Enter denominator:\n=> ");
+            y = int.Parse(Console.ReadLine());
+            Rational b = new Rational(x, y);
+            Console.WriteLine($"a = {a.ToString()}, b = {b.ToString()}");
+            a = low(a); b = low(b);
+            Console.WriteLine($"a = {a.ToString()}, b = {b.ToString()}");
+            Console.WriteLine($"a + b = {add(a, b).ToString()}");
+            Console.WriteLine($"a - b = {add(a, b, '-').ToString()}");
+            Console.WriteLine($"a / b = {low(a.Divide(b))}");
+            Console.WriteLine($"a * b = {low(a.Multiply(b))}");
+            Rational Thirty = new Rational(15, 30);
+            Rational half = new Rational(1, 2);
+            if (Thirty.IsEqual(half)) Console.WriteLine($"{Thirty.ToString()} is equal to {half.ToString()}");
+            else Console.WriteLine($"{Thirty.ToString()} is not equal to {half.ToString()}");
+        }
+        static Rational add(Rational a, Rational b, char sign = '+')
+        {
+            if (sign == '-') b = b.Multiply(new Rational(-1,1));
+            return low(new Rational(a.GetNumerator()*b.GetDenom()+a.GetDenom()*b.GetNumerator(), a.GetDenom()*b.GetDenom()));
+        }
+        static Rational low(Rational num)
+        {
+            int x = num.GetNumerator();
+            int y = num.GetDenom();
+            int a = Math.Abs(x);
+            int b = Math.Abs(y);
+            while (b != 0)
+            {
+                int remainder = a % b;
+                a = b;
+                b = remainder;
+            }
+            return new Rational(x/a, y/a);
         }
     }
 }
